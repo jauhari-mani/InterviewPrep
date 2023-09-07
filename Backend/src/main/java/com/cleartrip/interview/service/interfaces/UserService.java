@@ -5,8 +5,6 @@ package com.cleartrip.interview.service.interfaces;
 
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import com.cleartrip.interview.entities.Users;
 
@@ -14,7 +12,6 @@ import com.cleartrip.interview.entities.Users;
  * @author manijauhari
  *
  */
-@Service
 public interface UserService {
 
 	List<Users> findAll();
