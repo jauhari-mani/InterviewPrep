@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cleartrip.interview.controller.interfaces.UsersOperations;
 import com.cleartrip.interview.entities.Users;
 import com.cleartrip.interview.service.UserServiceImpl;
 
@@ -29,23 +30,23 @@ import com.cleartrip.interview.service.UserServiceImpl;
 @RequestMapping("/users")
 @RestController
 @CrossOrigin
-public class UserController {
+public class UserController implements UsersOperations {
 	
 	@Autowired
 	private UserServiceImpl userServiceImpl;
 	
-	@GetMapping
-	public List<Users> getAllUsers(){
+	@Override
+	public List<Users> getAll(){
 		return this.userServiceImpl.findAll();
 	}
 	
-	@GetMapping("/{id}")
+	@Override
 	public Users getUserById(@PathVariable int id) {
 		return this.userServiceImpl.findById(id);
 	}
 	
-	@PostMapping
-	public ResponseEntity<String> saveUser(Users user) {
+	@Override
+	public ResponseEntity<String> save(Users user) {
 		if(this.userServiceImpl.save(user)) {
 			return ResponseEntity.status(HttpStatus.OK).body("Saved User Successfully");
 		}else {
@@ -53,8 +54,8 @@ public class UserController {
 		}
 	}
 	
-	@PutMapping
-	public ResponseEntity<String> updateUser(Users user) {
+	@Override
+	public ResponseEntity<String> update(Users user) {
 		if(this.userServiceImpl.save(user)) {
 			return ResponseEntity.status(HttpStatus.OK).body("User Updated Successfully");
 		}else {
@@ -62,7 +63,7 @@ public class UserController {
 		}
 	}
 	
-	@DeleteMapping("/{id}")
+	@Override
 	public ResponseEntity<String> deleteById(@PathVariable int id) {
 		if(this.userServiceImpl.deleteById(id)) {
 			return ResponseEntity.status(HttpStatus.OK).body("Deleted User Successfully");
@@ -71,7 +72,7 @@ public class UserController {
 		}
 	}
 	
-	@DeleteMapping
+	@Override
 	public ResponseEntity<String> delete(@RequestBody Users user) {
 		if(this.userServiceImpl.delete(user)) {
 			return ResponseEntity.status(HttpStatus.OK).body("Deleted User Successfully");
