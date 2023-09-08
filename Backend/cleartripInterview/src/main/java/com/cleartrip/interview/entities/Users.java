@@ -32,10 +32,10 @@ public class Users {
 	private String lastName;
 	@Column(nullable = false, unique = true)
 	private String email;
-	@Column(nullable = false, length = 10, unique = true)
-	private int phnNumber;
+	@Column(nullable = false, unique = true)
+	private String phnNumber;
 
-	public Users(String firstName, String lastName, String email, int phnNumber) {
+	public Users(String firstName, String lastName, String email, String phnNumber) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
